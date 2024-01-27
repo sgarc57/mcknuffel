@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/mcknuffel/static/css/main.cb24ed6d.css",
-    "main.js": "/mcknuffel/static/js/main.ace15966.js",
+    "main.js": "/mcknuffel/static/js/main.c78a48f6.js",
     "static/js/787.14e4ec2f.chunk.js": "/mcknuffel/static/js/787.14e4ec2f.chunk.js",
     "static/media/mcknuffel_bear.png": "/mcknuffel/static/media/mcknuffel_bear.dd92743a71f96633e3b1.png",
     "static/media/green-dino.jpg": "/mcknuffel/static/media/green-dino.d5eae11d3ea653d94371.jpg",
@@ -9,11 +9,11 @@
     "static/media/blue-dino-bronco.jpg": "/mcknuffel/static/media/blue-dino-bronco.ac405cb4dbb8aeab4bf8.jpg",
     "index.html": "/mcknuffel/index.html",
     "main.cb24ed6d.css.map": "/mcknuffel/static/css/main.cb24ed6d.css.map",
-    "main.ace15966.js.map": "/mcknuffel/static/js/main.ace15966.js.map",
+    "main.c78a48f6.js.map": "/mcknuffel/static/js/main.c78a48f6.js.map",
     "787.14e4ec2f.chunk.js.map": "/mcknuffel/static/js/787.14e4ec2f.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.cb24ed6d.css",
-    "static/js/main.ace15966.js"
+    "static/js/main.c78a48f6.js"
   ]
 }
