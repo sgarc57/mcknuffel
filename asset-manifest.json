@@ -1,0 +1,18 @@
+{
+  "files": {
+    "main.css": "/mcknuffel/static/css/main.f855e6bc.css",
+    "main.js": "/mcknuffel/static/js/main.0461038e.js",
+    "static/js/787.14e4ec2f.chunk.js": "/mcknuffel/static/js/787.14e4ec2f.chunk.js",
+    "static/media/sea-turtle.jpg": "/mcknuffel/static/media/sea-turtle.a287587a0b8a1810963c.jpg",
+    "static/media/blue-dino-bronco.jpg": "/mcknuffel/static/media/blue-dino-bronco.ac405cb4dbb8aeab4bf8.jpg",
+    "static/media/logo.svg": "/mcknuffel/static/media/logo.6ce24c58023cc2f8fd88fe9d219db6c6.svg",
+    "index.html": "/mcknuffel/index.html",
+    "main.f855e6bc.css.map": "/mcknuffel/static/css/main.f855e6bc.css.map",
+    "main.0461038e.js.map": "/mcknuffel/static/js/main.0461038e.js.map",
+    "787.14e4ec2f.chunk.js.map": "/mcknuffel/static/js/787.14e4ec2f.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.f855e6bc.css",
+    "static/js/main.0461038e.js"
+  ]
+}
