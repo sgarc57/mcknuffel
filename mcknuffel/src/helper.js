@@ -1,5 +1,6 @@
 import blueDino from './img/blue-dino-bronco.jpg';
 import seaTurtle from './img/sea-turtle.jpg';
+import greenTrex from './img/green-dino.jpg';
 
 // Define the categories
 const categories = ['big', 'small', 'animal', 'weird'];
@@ -10,7 +11,7 @@ function Product({ product }) {
     <div>
       <img src={product.image} alt={product.name} />
       <h2>{product.name}</h2>
-      <p>{product.description}</p>
+      {/*<p>{product.description}</p>*/}
     </div>
   );
 }
@@ -45,6 +46,7 @@ export function Home({products}) {
 
 // Mock product data
 export const products = [
-  { id: 1, name: 'Big Toy', description: 'A big toy', category: 'big', image: seaTurtle },
+  { id: 1, name: 'Great Green Sea Turtle', description: 'We bought this toy when we were at an aquarium in  New Zealand, the name of the aquarium was Kelly Tarltons', category: 'big', image: seaTurtle },
+  { id: 2, name: 'Green T-Rex', description: 'We just got this one from Beckett when he was very small, he left it at our house in New Zealand', category: 'weird', image: greenTrex },
 ];
 
