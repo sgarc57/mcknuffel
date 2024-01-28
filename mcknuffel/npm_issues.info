@@ -1,0 +1,12 @@
+#install using yarn
+- yarn install
+
+#you can run these following commands to help with npm related issues:
+- $ npm_config_yes=true npx yarn-audit-fix
+
+
+#for ssl issues when trying to run, we chaned this config:
+from: "start": "react-scripts start"
+to: "start": "react-scripts --openssl-legacy-provider start"
+
+
