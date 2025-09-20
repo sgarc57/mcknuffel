@@ -1,0 +1,174 @@
+/* Image container for hover effect */
+.image-container {
+  position: relative;
+  width: 100%;
+  height: 250px; /* Fixed height for all images */
+  overflow: visible;
+  background-color: #f8f9fa;
+  z-index: 1;
+  /* Create a new stacking context */
+  transform: translateZ(0);
+}
+
+/* Default image style */
+.product-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: all 0.5s ease-in-out;
+  position: relative;
+  z-index: 1;
+  transform-origin: center center;
+}
+
+/* Image overlay that appears on hover */
+.image-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  transition: opacity 0.3s ease-in-out;
+  pointer-events: none;
+  z-index: 2;
+}
+
+/* Show overlay on container hover */
+.image-container:hover .image-overlay {
+  opacity: 1;
+}
+
+/* Zoom effect on image hover */
+.image-container:hover .product-image {
+  transform: scale(1.5);
+  z-index: 1000; /* Very high z-index to ensure it's above everything */
+  box-shadow: 0 0 30px rgba(0, 0, 0, 0.4);
+  transition: all 0.3s ease-in-out;
+  position: relative;
+}
+
+/* Style for the zoom text */
+.zoom-text {
+  color: white;
+  font-weight: bold;
+  text-align: center;
+  padding: 8px 16px;
+  border-radius: 4px;
+  background-color: rgba(0, 0, 0, 0.7);
+  font-size: 0.9rem;
+  pointer-events: none;
+}
+
+/* Card styling */
+.card {
+  transition: all 0.3s ease-in-out;
+  overflow: visible;
+  position: relative;
+  z-index: 1;
+  background: transparent;
+  border: none;
+}
+
+.card:hover {
+  z-index: 100; /* Higher z-index when hovered */
+  transform: translateY(-5px);
+  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+}
+
+/* Card body styling */
+.card-body {
+  position: relative;
+  z-index: 2; /* Lower than the image's z-index */
+  background: white;
+  margin-top: -5px; /* Slight overlap with the image */
+  padding: 1.25rem;
+  border-radius: 0 0 0.5rem 0.5rem;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease-in-out;
+}
+
+/* When card is hovered, lift the content slightly */
+.card:hover .card-body {
+  transform: translateY(5px);
+  box-shadow: 0 8px 15px rgba(0, 0, 0, 0.15);
+}
+
+/* Modal Styles */
+.image-modal .modal-content {
+  border: none;
+  border-radius: 0.75rem;
+  overflow: hidden;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+}
+
+.image-modal .modal-header {
+  background-color: #f8f9fa;
+  border-bottom: 1px solid #dee2e6;
+  padding: 1rem 1.5rem;
+}
+
+.image-modal .modal-title {
+  font-weight: 600;
+  color: #333;
+}
+
+.image-modal .modal-body {
+  padding: 1.5rem;
+  background-color: #fff;
+}
+
+.image-modal .close {
+  font-size: 1.5rem;
+  font-weight: 400;
+  line-height: 1;
+  color: #000;
+  text-shadow: 0 1px 0 #fff;
+  opacity: 0.5;
+  padding: 0.5rem;
+  margin: -0.5rem -0.5rem -0.5rem auto;
+  background-color: transparent;
+  border: 0;
+  -webkit-appearance: none;
+}
+
+.image-modal .close:hover {
+  opacity: 0.75;
+}
+
+/* Responsive image in modal */
+.modal-img-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 300px;
+  background-color: #f8f9fa;
+  border-radius: 0.5rem;
+  overflow: hidden;
+  margin-bottom: 1rem;
+}
+
+/* Animation for modal */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(-20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.modal.show .modal-dialog {
+  animation: fadeIn 0.3s ease-out;
+}
+
+/* Make the modal close button more visible */
+.modal-header .btn-close {
+  filter: invert(1) grayscale(100%) brightness(200%);
+  opacity: 0.8;
+  transition: opacity 0.2s;
+}
+
+.modal-header .btn-close:hover {
+  opacity: 1;
+}
