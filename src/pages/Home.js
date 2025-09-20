@@ -1,67 +1,116 @@
-import blueDino from  'img/blue-dino-bronco.jpg';
-import seaTurtle from 'img/sea-turtle.jpg';
-import greenTrex from 'img/green-dino.jpg';
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
+import { API_ENDPOINTS } from '../config';
+import { format } from 'date-fns';
 
-const categories = ['big', 'small', 'animal', 'weird'];
-
-// Create a Product component
-function Product({ product }) {
-  return (
-    <div>
-      <img src={product.image} alt={product.name} />
-      <h2>{product.name}</h2>
-      <p>{product.description}</p>
-    </div>
-  );
-}
-
-// Create a Category component
-function Category({ category, products }) {
-  return (
-    <div>
-      <h1>{category}</h1>
-      {products
-        .filter((product) => product.category === category)
-        .map((product) => (
-          <Product key={product.id} product={product} />
-        ))}
-    </div>
-  );
-}
-
-      //{/* Example image at top */}
-      //<img src={blueDino} alt="Welcome to our toy store: McKnuffel!" />
-      //{categories.map((category) => (
-      //  <Category key={category} category={category} products={products} />
-      //))}
 // Home page
-export function HomePage({ products }) {
+export function HomePage() {
+  const [products, setProducts] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
+  const [error, setError] = useState(null);
+
+  // Fetch all products
+  useEffect(() => {
+    const fetchProducts = async () => {
+      try {
+        const response = await axios.get(API_ENDPOINTS.ALL_IMAGES);
+        setProducts(response.data);
+        setError(null);
+      } catch (err) {
+        console.error('Error fetching products:', err);
+        setError('Failed to load products. Please try again later.');
+      } finally {
+        setIsLoading(false);
+      }
+    };
+
+    fetchProducts();
+  }, []);
+
+  if (isLoading) {
+    return (
+      <div className="d-flex justify-content-center align-items-center" style={{ minHeight: '50vh' }}>
+        <div className="spinner-border text-primary" role="status">
+          <span className="visually-hidden">Loading...</span>
+        </div>
+      </div>
+    );
+  }
+
+  if (error) {
+    return (
+      <div className="alert alert-danger m-4" role="alert">
+        {error}
+      </div>
+    );
+  }
+
+  const formatFileSize = (bytes) => {
+    if (bytes === 0) return '0 Bytes';
+    const k = 1024;
+    const sizes = ['Bytes', 'KB', 'MB', 'GB'];
+    const i = Math.floor(Math.log(bytes) / Math.log(k));
+    return parseFloat((bytes / Math.pow(k, i)).toFixed(2)) + ' ' + sizes[i];
+  };
+
   return (
-    <div>
-      <h1>Welcome to the Toy Store!</h1>
-      <h1>Ending Toy Store!</h1>
+    <div className="container py-4">
+      <h1 className="text-center mb-4">Welcome to the Toy Store!</h1>
+      
+      {products.length === 0 ? (
+        <div className="alert alert-info">No products found. Start by uploading some images!</div>
+      ) : (
+        <div className="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
+          {products.map((product) => (
+            <div key={product.id} className="col">
+              <div className="card h-100 shadow-sm">
+                <img
+                  src={product.downloadUrl}
+                  alt={product.name || 'Product image'}
+                  className="card-img-top img-fluid"
+                  style={{ height: '250px', objectFit: 'cover' }}
+                  onError={(e) => {
+                    e.target.onerror = null;
+                    e.target.src = 'https://via.placeholder.com/300x200?text=Image+Not+Available';
+                  }}
+                />
+                <div className="card-body">
+                  <h5 className="card-title">{product.name || 'Untitled'}</h5>
+                  {product.description && (
+                    <p className="card-text">{product.description}</p>
+                  )}
+                  <div className="mt-2">
+                    {product.category && (
+                      <span className="badge bg-primary me-2">
+                        {product.category.replace('_', ' ')}
+                      </span>
+                    )}
+                    {product.type && (
+                      <span className="badge bg-secondary me-2">
+                        {product.type.split('/')[1]?.toUpperCase() || product.type}
+                      </span>
+                    )}
+                    {product.size && (
+                      <span className="badge bg-info text-dark">
+                        {formatFileSize(product.size)}
+                      </span>
+                    )}
+                  </div>
+                  {product.uploadedAt && (
+                    <small className="text-muted d-block mt-2">
+                      Uploaded: {format(new Date(product.uploadedAt), 'MMM d, yyyy')}
+                    </small>
+                  )}
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+      )}
+      
+      <h1 className="text-center mt-5">Ending Toy Store!</h1>
     </div>
   );
 }
-
-// Mock product data
-export const products = [
-  {
-    id: 1,
-    name: 'Great Green Sea Turtle',
-    description:
-      'We bought this toy when we were at an aquarium in New Zealand, the name of the aquarium was Kelly Tarltons',
-    category: 'big',
-    image: seaTurtle,
-  },
-  {
-    id: 2,
-    name: 'Green T-Rex',
-    description:
-      'We just got this one from Beckett when he was very small, he left it at our house in New Zealand',
-    category: 'weird',
-    image: greenTrex,
-  },
-];
 
 export default HomePage;

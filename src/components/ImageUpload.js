@@ -13,7 +13,7 @@ function ImageUpload() {
         formData.append("image", file);
 
         try {
-            const res = await axios.post("/api/upload", formData, {
+            const res = await axios.post("http://localhost:8080/api/upload", formData, {
                 headers: { "Content-Type": "multipart/form-data" },
             });
             alert("Upload success: " + res.data);

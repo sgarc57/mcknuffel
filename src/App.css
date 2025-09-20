@@ -1,12 +1,12 @@
 .App {
   text-align: center;
 }
-
+/*
 .App-logo {
   height: 40vmin;
   pointer-events: none;
 }
-
+*/
 {/*
 @media (prefers-reduced-motion: no-preference) {
   .App-logo {
@@ -14,17 +14,18 @@
   }
 }
 */}
+/*
 .App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
-}
-
+     background-color: #282c34;
+     padding: 2rem 1rem;
+     display: flex;
+     flex-direction: column;
+     align-items: center;
+     justify-content: center;
+     font-size: calc(10px + 2vmin);
+     color: white;
+   }
+   */
 .App-link {
   color: #61dafb;
 }
@@ -39,3 +40,155 @@
   }
 }
 */}
+@import url('https://fonts.googleapis.com/css2?family=Teko:wght@400;500&display=swap');
+
+$teko: 'Teko', sans-serif;
+
+/*// Breakpoints*/
+$sm: 576px;
+$md: 768px;
+$lg: 992px;
+
+$max-sm: 576px - 0.02px;
+$max-md: 768px - 0.02px;
+$max-lg: 992px - 0.02px;
+
+/*// Font sizes*/
+$text-sm: 0.875rem; /*// 14px*/
+$text-xs: 0.8125rem; /*// 13px*/
+$text-xxs: 0.74rem; /*// 12px*/
+
+/*// Colors*/
+$text-primary: #222;
+$text-secondary: #666;
+$text-danger: #dc3545;
+
+:focus {
+  outline: none;
+}
+
+body {
+  color: $text-primary;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  line-height: 1.2;
+  margin-bottom: 0.5rem;
+  font-weight: 500;
+}
+
+h1 {
+  line-height: 1;
+  font-size: 3rem;
+  font-family: $teko;
+  text-transform: uppercase;
+  @media (min-width: 768px) {
+    font-size: 4rem;
+  }
+  @media (min-width: 992px) {
+    font-size: 5rem;
+  }
+}
+
+h6 {
+  font-size: $text-sm;
+}
+
+p {
+  margin-bottom: 0.5rem;
+}
+
+section {
+  margin-top: 2rem;
+  margin-bottom: 4rem;
+}
+
+hr {
+  width: 7rem;
+  margin: 1.5rem auto;
+  border: 0;
+  border-top: 2px solid $text-primary;
+}
+
+.container {
+  max-width: 1100px;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 15px;
+  padding-right: 15px;
+  @media (min-width: 576px) {
+    padding-left: 24px;
+    padding-right: 24px;
+  }
+}
+
+.btn {
+  font-family: $teko;
+  text-transform: uppercase;
+  &--chevron-right {
+    &::after {
+      font-family: "Font Awesome 5 Free";
+      font-weight: 900;
+      content: "\f054";
+      margin-left: 0.5rem;
+    }
+  }
+  &--small {
+    font-size: $text-sm;
+  }
+  &--border {
+    border: 1px solid #000;
+    line-height: 1;
+    padding: 0.25rem 1rem;
+    border-radius: 0;
+  }
+  &--gray {
+    color: $text-secondary;
+    border-color: $text-secondary;
+    &:hover {
+      color: white;
+      background: $text-secondary;
+    }
+  }
+}
+
+.card {
+  text-align: center;
+  padding-left: 0.5rem;
+  padding-right: 0.5rem;
+  &__img {
+    width: 100%;
+    margin-bottom: 1rem;
+  }
+  &__title {
+    /*// two lines title*/
+    height: $text-sm * 2 * 1.2;
+    overflow: hidden;
+    text-overflow: ellipsis;
+
+    /*// one line title*/
+    @media (min-width: 576px) {
+      height: auto;
+      white-space: nowrap;
+    }
+  }
+  &__text {
+    margin-bottom: 0.75rem;
+    font-size: $text-sm;
+  }
+}
+
+.slider-wrapper {
+  padding-left: 25px;
+  padding-right: 25px;
+  @media (max-width: $max-lg) {
+    padding-left: 0;
+    padding-right: 0;
+  }
+}
+
+.slick-next:before, .slick-prev:before {
+  color: $text-primary;
+}
