@@ -35,10 +35,11 @@ function App() {
       <div className="App d-flex flex-column min-vh-100">
         <Navigation />
         
-        <main className="flex-grow-1">
+        {/* Add padding-top to account for fixed navbar */}
+        <main className="flex-grow-1" style={{ paddingTop: '76px' }}>
           {/* Hero Section - Only on Home Page */}
           {window.location.pathname === '/' || window.location.pathname === '/home' ? (
-            <header className="App-header py-5 bg-primary text-white mb-5">
+            <header className="App-header py-5 bg-primary text-white">
               <div className="container text-center">
                 <img 
                   src="/logo512.png" 
