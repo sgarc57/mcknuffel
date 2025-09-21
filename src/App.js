@@ -1,14 +1,24 @@
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
-import logo from 'img/mcknuffel_bear.png';
 import 'App.css';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import 'bootstrap-icons/font/bootstrap-icons.css';
+
+// Pages
 import HomePage from 'pages/Home';
 import DashboardPage from 'pages/Dashboard';
 import UploadPage from 'pages/UploadPage';
-import "bootstrap/dist/css/bootstrap.min.css";
+import Login from 'pages/Login';
+import Signup from 'pages/Signup';
+import Basket from 'pages/Basket';
+import Newsletter from 'pages/NewsLetter';
+
+// Components
+import Navigation from 'components/Navigation';
 import BestsellersSection from "components/BestSellers";
+
+// Services
 import useFetch from "services/useFetch";
-import Newsletter from "pages/NewsLetter";
 
 // --- Main App ---
 //         <header className="App-header text-white d-flex flex-column align-items-center vh-50 img-fluid w-50 rounded shadow-lg border border-3 border-primary">
@@ -22,39 +32,70 @@ function App() {
 
   return (
     <Router>
-      <div className="App">
-        {/* Header/logo stays consistent across pages */}
-        <header className="App-header">
-        <row>
-        <container>
-        <div className="text-white border-3 border-primary img-fluid rounded-3 shadow-lg">
-          <img src={logo} className="App-logo" alt="logo" />
-          <h1 className="text-center">Welcome to McKnuffel!</h1>
-          <BestsellersSection data={data} />;
+      <div className="App d-flex flex-column min-vh-100">
+        <Navigation />
+        
+        <main className="flex-grow-1">
+          {/* Hero Section - Only on Home Page */}
+          {window.location.pathname === '/' || window.location.pathname === '/home' ? (
+            <header className="App-header py-5 bg-primary text-white mb-5">
+              <div className="container text-center">
+                <img 
+                  src="/logo512.png" 
+                  className="App-logo mb-4" 
+                  alt="McKnuffel Logo" 
+                  style={{ height: '120px' }}
+                />
+                <h1 className="display-4 fw-bold mb-4">Welcome to McKnuffel!</h1>
+                <p className="lead">Discover our amazing collection of plush toys</p>
+                <BestsellersSection data={data} />
+              </div>
+            </header>
+          ) : (
+            <div className="container py-4">
+              <h1 className="mb-4">
+                {window.location.pathname === '/login' && 'Login'}
+                {window.location.pathname === '/signup' && 'Create an Account'}
+                {window.location.pathname === '/basket' && 'Your Shopping Basket'}
+                {window.location.pathname === '/dashboard' && 'Dashboard'}
+                {window.location.pathname === '/upload' && 'Upload'}
+                {window.location.pathname === '/newsletter' && 'Newsletter'}
+              </h1>
+            </div>
+          )}
+
+          <div className="container">
+            <Routes>
+              {/* Redirect root '/' to '/home' */}
+              <Route path="/" element={<Navigate to="/home" replace />} />
+
+              {/* Home page */}
+              <Route path="/home" element={<HomePage />} />
+
+              {/* Dashboard page */}
+              <Route path="/dashboard" element={<DashboardPage />} />
+
+              {/* Upload page */}
+              <Route path="/upload" element={<UploadPage />} />
+              
+              {/* Auth pages */}
+              <Route path="/login" element={<Login />} />
+              <Route path="/signup" element={<Signup />} />
+              
+              {/* Basket page */}
+              <Route path="/basket" element={<Basket />} />
+              
+              <Route path="/newsletter" element={<Newsletter />} />
+              <Route path="*" element={<Navigate to="/home" replace />} />
+            </Routes>
           </div>
-          </container>
-          </row>
-        </header>
-
-
-        {/* Routing */}
-        <Routes>
-          {/* Redirect root '/' to '/home' */}
-          <Route path="/" element={<Navigate to="/home" replace />} />
-
-          {/* Home page */}
-          <Route path="/home" element={<HomePage />} />
-
-          {/* Dashboard page */}
-          <Route path="/dashboard" element={<DashboardPage />} />
-
-          {/* Upload page */}
-          <Route path="/upload" element={<UploadPage />} />
-
-          {/* Newsletter page */}
-          <Route path="/newsletter" element={<Newsletter />} />
-
-        </Routes>
+        </main>
+        
+        <footer className="bg-light py-4 mt-auto">
+          <div className="container text-center">
+            <p className="mb-0">&copy; {new Date().getFullYear()} McKnuffel. All rights reserved.</p>
+          </div>
+        </footer>
       </div>
     </Router>
   );

@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { API_ENDPOINTS } from '../config';
 import { format } from 'date-fns';
-import { Modal } from 'react-bootstrap';
+import ImageModal from '../components/ImageModal';
 import './Home.css'; // We'll create this file for custom styles
 
 // Home page
@@ -49,13 +49,6 @@ export function HomePage() {
     );
   }
 
-  const formatFileSize = (bytes) => {
-    if (bytes === 0) return '0 Bytes';
-    const k = 1024;
-    const sizes = ['Bytes', 'KB', 'MB', 'GB'];
-    const i = Math.floor(Math.log(bytes) / Math.log(k));
-    return parseFloat((bytes / Math.pow(k, i)).toFixed(2)) + ' ' + sizes[i];
-  };
 
   return (
     <div className="container py-4">
@@ -92,7 +85,7 @@ export function HomePage() {
                   </div>
                 </div>
                 <div className="card-body">
-                  <h5 className="card-title">{product.name || 'Untitled'}</h5>
+                  <h5 className="card-title">{product.title || 'Untitled'}</h5>
                   {product.description && (
                     <p className="card-text">{product.description}</p>
                   )}
@@ -109,7 +102,7 @@ export function HomePage() {
                     )}
                     {product.size && (
                       <span className="badge bg-info text-dark">
-                        {formatFileSize(product.size)}
+                        {product.size}
                       </span>
                     )}
                   </div>
@@ -127,48 +120,12 @@ export function HomePage() {
       
       <h1 className="text-center mt-5">Ending Toy Store!</h1>
       
-      {/* Image Modal */}
-      <Modal 
-        show={showModal} 
+      {/* Reusable Image Modal */}
+      <ImageModal 
+        show={showModal}
         onHide={() => setShowModal(false)}
-        size="lg"
-        centered
-        className="image-modal"
-      >
-        <Modal.Header closeButton>
-          <Modal.Title>{selectedImage?.name || 'Product Image'}</Modal.Title>
-        </Modal.Header>
-        <Modal.Body className="text-center">
-          {selectedImage && (
-            <img 
-              src={selectedImage.downloadUrl} 
-              alt={selectedImage.name || 'Product image'}
-              className="img-fluid"
-              style={{ maxHeight: '70vh', maxWidth: '100%', objectFit: 'contain' }}
-              onError={(e) => {
-                e.target.onerror = null;
-                e.target.src = 'https://via.placeholder.com/800x600?text=Image+Not+Available';
-              }}
-            />
-          )}
-          {selectedImage?.description && (
-            <p className="mt-3">{selectedImage.description}</p>
-          )}
-          <div className="mt-2 text-muted">
-            <small>
-              {selectedImage?.fileType && (
-                <span className="me-2">Type: {selectedImage.fileType.toUpperCase()}</span>
-              )}
-              {selectedImage?.fileSize && (
-                <span className="me-2">• Size: {formatFileSize(selectedImage.fileSize)}</span>
-              )}
-              {selectedImage?.uploadedAt && (
-                <span>• Uploaded: {format(new Date(selectedImage.uploadedAt), 'MMM d, yyyy')}</span>
-              )}
-            </small>
-          </div>
-        </Modal.Body>
-      </Modal>
+        image={selectedImage}
+      />
     </div>
   );
 }
